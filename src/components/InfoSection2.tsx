@@ -14,8 +14,8 @@ const sectionVariants = {
 
 const Section: React.FC = React.memo(() => {
   const { ref, inView } = useInView({
-    triggerOnce: true, // Animation triggers only once
-    threshold: 0.1, // Trigger when 10% of the section is visible
+    triggerOnce: true,
+    threshold: 0.1,
   });
 
   return (
@@ -23,29 +23,28 @@ const Section: React.FC = React.memo(() => {
       ref={ref}
       className='mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16'>
       <div className='grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16'>
-        {/* Image Section */}
         <motion.div
           className='relative h-64 overflow-hidden lg:h-full'
           variants={sectionVariants}
           initial='hidden'
           animate={inView ? 'visible' : 'hidden'}
-          transition={{ delay: 0.5, duration: 1 }}>
+          transition={{ delay: 0.3, duration: 0.8 }}>
           <Image
             alt='Illustrative mockup of Team tools'
             src='/angle.png'
             fill
+            sizes='(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw'
             style={{ objectFit: 'cover' }}
             className='absolute inset-0'
-            priority // Ensure the image loads quickly
+            priority
           />
         </motion.div>
 
-        {/* Text Section */}
         <motion.div
           variants={sectionVariants}
           initial='hidden'
           animate={inView ? 'visible' : 'hidden'}
-          transition={{ delay: 0.5, duration: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
           className='relative lg:py-24'>
           <h2 className='text-3xl font-bold text-[#232340] sm:text-4xl lg:text-5xl leading-tight'>
             Move faster with your Team tools

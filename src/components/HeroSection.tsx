@@ -1,57 +1,54 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { motion } from 'framer-motion';
 
-const HeroSection: React.FC = React.memo(() => {
+const HeroSection: React.FC = () => {
   const { ref, inView } = useInView({
-    triggerOnce: true, // Animation triggers only once
-    threshold: 0.1, // Trigger when 10% of the section is visible
+    triggerOnce: true,
+    threshold: 0.1,
   });
+
+  const [bgImageLoaded, setBgImageLoaded] = useState(false);
+
+  useEffect(() => {
+    if (inView) {
+      const img = new Image();
+      img.src = '/orang.png'; // Ensure the path is correct
+      img.onload = () => setBgImageLoaded(true);
+    }
+  }, [inView]);
 
   return (
     <section
       ref={ref}
-      className='relative w-full h-screen bg-cover bg-center bg-fixed flex flex-col justify-center px-4 md:px-8 lg:px-16 xl:px-[140px]'
-      style={{
-        backgroundImage: 'url(/orang.svg)', // Update to use url() for backgroundImage
-        backgroundColor: '#F5F5F5',
-      }}>
-      {/* Hero Heading */}
-      <motion.h1
-        className='text-[#F5F5F5] text-[40px] md:text-[50px] font-bold leading-[48px] md:leading-[64px] mb-4 max-w-[563px]'
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : -50 }}
-        transition={{ duration: 1 }}>
+      className={`relative w-full h-screen flex flex-col justify-center px-4 md:px-8 lg:px-16 xl:px-[140px] bg-cover bg-center transition-all duration-500 ease-in-out ${
+        bgImageLoaded ? 'bg-[url(/orang.png)]' : 'bg-[#F5F5F5]'
+      }`}>
+      <h1 className='text-white text-4xl md:text-5xl font-bold mb-4 max-w-md'>
         Instant collaboration for remote teams
-      </motion.h1>
+      </h1>
 
-      {/* Hero Subheading */}
-      <motion.p
-        className='text-[#F5F5F5] text-base md:text-lg font-normal leading-[24px] md:leading-[27px] mb-14 max-w-[397px]'
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : -30 }}
-        transition={{ duration: 1, delay: 0.3 }}>
-        All-in-one place for your remote team to chat, collaborate and track
+      <p className='text-white text-base md:text-lg mb-14 max-w-md'>
+        All-in-one place for your remote team to chat, collaborate, and track
         project progress.
-      </motion.p>
+      </p>
 
-      {/* Action Buttons */}
-      <div className='relative flex flex-col md:flex-row gap-4'>
+      <div className='flex flex-col md:flex-row gap-4'>
         <input
           type='email'
           placeholder='Email'
-          className='w-full md:w-[298px] py-[11px] px-4 bg-[#F5F5F5] border-2 border-[#D1ECFD] rounded-md text-sm text-[#7676B2]'
+          className='w-full md:w-[298px] py-2 px-4 bg-white border-2 border-blue-200 rounded-md text-sm text-gray-600'
           required
+          aria-label='Email address'
         />
-        <button className='py-[10px] px-11 bg-[#5468E7] text-[#F5F5F5] text-lg font-normal rounded-md cursor-pointer'>
+        <button className='py-2 px-6 bg-blue-600 text-white text-lg rounded-md'>
           Get Early Access
         </button>
       </div>
     </section>
   );
-});
+};
 
 HeroSection.displayName = 'HeroSection';
 

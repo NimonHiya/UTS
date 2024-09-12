@@ -12,7 +12,6 @@ const Section: React.FC = React.memo(() => {
     threshold: 0.1,
   });
 
-  // Memoize the animation variants inside the component
   const sectionVariants = React.useMemo(
     () => ({
       hidden: { opacity: 0 },
@@ -25,8 +24,7 @@ const Section: React.FC = React.memo(() => {
     <section
       ref={ref}
       className='mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16'>
-      <div className='grid grid-cols-1 lg:grid-cols-2 lg:gap-16 gap-8'>
-        {/* Image Section */}
+      <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16'>
         <motion.div
           className='relative h-64 lg:h-full overflow-hidden'
           variants={sectionVariants}
@@ -36,14 +34,14 @@ const Section: React.FC = React.memo(() => {
           <Image
             alt='Mockup'
             src='/Rectangle.jpg'
-            layout='fill'
-            objectFit='cover'
+            fill
+            sizes='(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw'
+            style={{ objectFit: 'cover' }}
             className='absolute inset-0'
-            priority // Ensure the image is loaded quickly
+            priority
           />
         </motion.div>
 
-        {/* Text Section */}
         <motion.div
           className='relative lg:py-24'
           variants={sectionVariants}

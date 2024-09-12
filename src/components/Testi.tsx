@@ -1,14 +1,13 @@
 'use client';
 
 import React from 'react';
-import TestimonialCard from './TestimonialCard';
+import TestimonialCard from './TestimonialCard'; // Ensure the path is correct
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-// Type for testimonial
 interface Testimonial {
   name: string;
   title: string;
@@ -86,30 +85,33 @@ const Testi: React.FC = () => {
     []
   );
 
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    responsive: [
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
+  const sliderSettings = React.useMemo(
+    () => ({
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      arrows: true,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+          },
         },
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 2,
+          },
         },
-      },
-    ],
-  };
+      ],
+    }),
+    []
+  );
 
   return (
     <div className='w-full py-12 bg-gray-100'>
