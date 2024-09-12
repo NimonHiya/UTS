@@ -31,11 +31,12 @@ const Section: React.FC = React.memo(() => {
           animate={inView ? 'visible' : 'hidden'}
           transition={{ delay: 0.5, duration: 1 }}>
           <Image
-            alt='Mockup'
+            alt='Illustrative mockup showcasing features'
             src='/Rec.png'
             fill
             style={{ objectFit: 'cover' }}
             className='absolute inset-0'
+            priority // Ensure the image loads quickly
           />
         </motion.div>
 
@@ -49,16 +50,15 @@ const Section: React.FC = React.memo(() => {
           <h2 className='text-3xl font-bold text-[#232340] sm:text-4xl lg:text-5xl leading-tight'>
             Choose how you want to work
           </h2>
-
           <p className='mt-4 text-lg text-[#232340] leading-relaxed'>
             In Team, you’ve got all the flexibility to work when, where, and how
             it’s best for you. You can easily chat, send audio and video clips,
             or hop on a huddle to talk things out live.
           </p>
-
           <a
             href='#'
-            className='mt-6 inline-flex items-center text-[#5468E7] font-medium underline underline-offset-2 transition-transform duration-200 ease-in-out hover:scale-105'>
+            className='mt-6 inline-flex items-center text-[#5468E7] font-medium underline underline-offset-2 transition-transform duration-200 ease-in-out hover:scale-105'
+            aria-label='Learn more about flexible working options'>
             <span className='pr-2'>Learn more</span>
             <FaArrowRight />
           </a>

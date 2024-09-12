@@ -15,7 +15,7 @@ const HeroSection: React.FC = React.memo(() => {
       ref={ref}
       className='relative w-full h-screen bg-cover bg-center bg-fixed flex flex-col justify-center px-4 md:px-8 lg:px-16 xl:px-[140px]'
       style={{
-        backgroundImage: `url('/orang.svg')`,
+        backgroundImage: 'url(/orang.svg)', // Update to use url() for backgroundImage
         backgroundColor: '#F5F5F5',
       }}>
       {/* Hero Heading */}

@@ -6,17 +6,20 @@ import { FaArrowRight } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
-// Variants for animation
-const sectionVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-};
-
 const Section: React.FC = React.memo(() => {
   const { ref, inView } = useInView({
-    triggerOnce: true, // Animation triggers only once
-    threshold: 0.1, // Trigger when 10% of the section is visible
+    triggerOnce: true,
+    threshold: 0.1,
   });
+
+  // Memoize the animation variants inside the component
+  const sectionVariants = React.useMemo(
+    () => ({
+      hidden: { opacity: 0 },
+      visible: { opacity: 1 },
+    }),
+    []
+  );
 
   return (
     <section
@@ -33,9 +36,10 @@ const Section: React.FC = React.memo(() => {
           <Image
             alt='Mockup'
             src='/Rectangle.jpg'
-            fill
-            style={{ objectFit: 'cover' }}
+            layout='fill'
+            objectFit='cover'
             className='absolute inset-0'
+            priority // Ensure the image is loaded quickly
           />
         </motion.div>
 
@@ -56,7 +60,8 @@ const Section: React.FC = React.memo(() => {
           </p>
           <a
             href='#'
-            className='mt-6 inline-flex items-center text-[#5468E7] font-medium underline underline-offset-2 transition-transform duration-200 ease-in-out hover:scale-105'>
+            className='mt-6 inline-flex items-center text-[#5468E7] font-medium underline underline-offset-2 transition-transform duration-200 ease-in-out hover:scale-105'
+            aria-label='Learn more about our chat feature'>
             <span className='pr-2'>Learn more</span>
             <FaArrowRight />
           </a>

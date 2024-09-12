@@ -31,11 +31,12 @@ const Section: React.FC = React.memo(() => {
           animate={inView ? 'visible' : 'hidden'}
           transition={{ delay: 0.5, duration: 1 }}>
           <Image
-            alt='Mockup'
+            alt='Illustrative mockup of Team tools'
             src='/angle.png'
             fill
             style={{ objectFit: 'cover' }}
             className='absolute inset-0'
+            priority // Ensure the image loads quickly
           />
         </motion.div>
 
@@ -49,16 +50,15 @@ const Section: React.FC = React.memo(() => {
           <h2 className='text-3xl font-bold text-[#232340] sm:text-4xl lg:text-5xl leading-tight'>
             Move faster with your Team tools
           </h2>
-
           <p className='mt-4 text-lg text-[#232340] leading-relaxed'>
             With your other work apps connected to Team, you can work faster by
             switching tabs less. And with powerful tools like Workflow Builder,
             you can automate away routine tasks.
           </p>
-
           <a
             href='#'
-            className='mt-6 inline-flex items-center text-[#5468E7] font-medium underline underline-offset-2 transition-transform duration-200 ease-in-out hover:scale-105'>
+            className='mt-6 inline-flex items-center text-[#5468E7] font-medium underline underline-offset-2 transition-transform duration-200 ease-in-out hover:scale-105'
+            aria-label='Learn more about Team tools and automation'>
             <span className='pr-2'>Learn more</span>
             <FaArrowRight />
           </a>

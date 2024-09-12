@@ -24,14 +24,13 @@ const Section: React.FC = () => {
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16'>
           {/* Image Section */}
           <motion.div
-            ref={ref} // Attach the ref to the div
             className='relative h-64 overflow-hidden rounded-lg sm:h-80 lg:h-full lg:order-last'
             variants={sectionVariants}
             initial='hidden'
             animate={inView ? 'visible' : 'hidden'}
             transition={{ delay: 0.5, duration: 1 }}>
             <Image
-              alt='Mockup'
+              alt='Illustrative mockup'
               src='/mockup.svg'
               fill
               style={{ objectFit: 'cover' }}
@@ -58,7 +57,8 @@ const Section: React.FC = () => {
             </p>
             <a
               href='#'
-              className='mt-6 inline-flex items-center text-[#5468E7] font-medium underline underline-offset-2 transition-transform duration-200 ease-in-out hover:scale-105'>
+              className='mt-6 inline-flex items-center text-[#5468E7] font-medium underline underline-offset-2 transition-transform duration-200 ease-in-out hover:scale-105'
+              aria-label='Learn more about chat features'>
               <span className='pr-2'>Learn more</span>
               <FaArrowRight />
             </a>

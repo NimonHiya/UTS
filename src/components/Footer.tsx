@@ -4,35 +4,37 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
-// Variants untuk animasi
+// Variants for animations
 const sectionVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },
 };
 
-// Komponen AnimatedSection dengan variants
-const AnimatedSection: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.2,
-  });
+// AnimatedSection component with variants
+const AnimatedSection: React.FC<{ children: React.ReactNode }> = React.memo(
+  ({ children }) => {
+    const { ref, inView } = useInView({
+      triggerOnce: true,
+      threshold: 0.2,
+    });
 
-  return (
-    <motion.div
-      ref={ref}
-      variants={sectionVariants}
-      initial='hidden'
-      animate={inView ? 'visible' : 'hidden'}
-      transition={{ duration: 0.8 }}>
-      {children}
-    </motion.div>
-  );
-};
-AnimatedSection.displayName = 'AnimatedSection'; // Menambahkan display name
+    return (
+      <motion.div
+        ref={ref}
+        variants={sectionVariants}
+        initial='hidden'
+        animate={inView ? 'visible' : 'hidden'}
+        transition={{ duration: 0.8 }}
+        style={{ willChange: 'opacity, transform' }} // Improve animation performance
+      >
+        {children}
+      </motion.div>
+    );
+  }
+);
+AnimatedSection.displayName = 'AnimatedSection';
 
-// Komponen FooterSection yang di-memo
+// FooterSection component with memoization
 const FooterSection = React.memo(
   ({ title, items }: { title: string; items: string[] }) => (
     <div className='flex-1 mb-8 md:mb-0'>
@@ -49,9 +51,9 @@ const FooterSection = React.memo(
     </div>
   )
 );
-FooterSection.displayName = 'FooterSection'; // Menambahkan display name
+FooterSection.displayName = 'FooterSection';
 
-// Komponen ContactSection yang di-memo
+// ContactSection component with memoization
 const ContactSection = React.memo(() => (
   <div className='flex-1 mb-8 md:mb-0'>
     <div className='text-[#5468E7] text-xl md:text-2xl font-normal mb-4'>
@@ -70,9 +72,9 @@ const ContactSection = React.memo(() => (
     </div>
   </div>
 ));
-ContactSection.displayName = 'ContactSection'; // Menambahkan display name
+ContactSection.displayName = 'ContactSection';
 
-// Komponen StayUpToDateSection yang di-memo
+// StayUpToDateSection component with memoization
 const StayUpToDateSection = React.memo(() => (
   <div className='flex-1'>
     <div className='text-[#5468E7] text-xl md:text-2xl font-normal mb-4'>
@@ -86,7 +88,7 @@ const StayUpToDateSection = React.memo(() => (
         type='email'
         placeholder='Email'
         className='flex-1 p-3 bg-[rgba(245,245,245,0.24)] border-none rounded-md text-white text-xs md:text-sm'
-        required // Menambahkan atribut required
+        required
       />
       <button className='bg-[rgba(245,245,245,0.24)] border-none rounded-md p-3 mt-2 md:mt-0 md:ml-2 cursor-pointer'>
         <span className='text-white text-lg md:text-xl'>→</span>
@@ -94,15 +96,13 @@ const StayUpToDateSection = React.memo(() => (
     </div>
   </div>
 ));
-StayUpToDateSection.displayName = 'StayUpToDateSection'; // Menambahkan display name
+StayUpToDateSection.displayName = 'StayUpToDateSection';
 
-// Komponen Footer
+// Footer component
 const Footer = () => {
   return (
     <div className='w-full min-h-[500px] bg-[#232340] p-6 sm:p-10 md:px-24 lg:px-36 relative flex flex-col'>
-      {/* Content Container */}
       <div className='flex-1'>
-        {/* Logo and Tagline */}
         <AnimatedSection>
           <div className='flex flex-col items-start gap-4 mb-8 md:mb-10'>
             <div className='flex items-center'>
@@ -121,16 +121,12 @@ const Footer = () => {
           </div>
         </AnimatedSection>
 
-        {/* Footer Links */}
         <AnimatedSection>
           <div className='flex flex-col md:flex-row md:justify-between'>
-            {/* Company Section */}
             <FooterSection
               title='Company'
               items={['Product', 'Blog', 'Support']}
             />
-
-            {/* Features Section */}
             <FooterSection
               title='Features'
               items={[
@@ -140,17 +136,12 @@ const Footer = () => {
                 'User Management',
               ]}
             />
-
-            {/* Contact Us Section */}
             <ContactSection />
-
-            {/* Stay Up to Date Section */}
             <StayUpToDateSection />
           </div>
         </AnimatedSection>
       </div>
 
-      {/* Copyright Section */}
       <AnimatedSection>
         <div className='text-white text-xs font-normal opacity-50 mt-8 md:mt-10'>
           © Copyright Team Inc.
@@ -160,6 +151,6 @@ const Footer = () => {
   );
 };
 
-Footer.displayName = 'Footer'; // Menambahkan display name
+Footer.displayName = 'Footer';
 
 export default Footer;

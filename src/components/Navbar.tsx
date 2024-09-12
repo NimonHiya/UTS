@@ -1,9 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 
+// Dynamically import RxHamburgerMenu with no server-side rendering
 const RxHamburgerMenu = dynamic(
   () => import('react-icons/rx').then((mod) => mod.RxHamburgerMenu),
   { ssr: false }
@@ -13,27 +14,33 @@ const Navbar: React.FC = () => {
   const [isScrolling, setIsScrolling] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleOpenMenu = () => {
+  // Handler for toggling menu
+  const handleOpenMenu = useCallback(() => {
     setIsMenuOpen((prev) => !prev);
     if (!isMenuOpen) setIsScrolling(true);
-  };
+  }, [isMenuOpen]);
+
+  // Scroll event handler
+  const handleScroll = useCallback(() => {
+    setIsScrolling(window.scrollY > 0);
+  }, []);
+
+  // Resize event handler
+  const handleResize = useCallback(() => {
+    if (window.innerWidth >= 960) {
+      setIsMenuOpen(false);
+      setIsScrolling(window.scrollY > 0);
+    }
+  }, []);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolling(window.scrollY > 0);
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 960) {
-        setIsMenuOpen(false);
-        setIsScrolling(window.scrollY > 0);
-      }
-    };
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [handleScroll, handleResize]);
 
   return (
     <nav

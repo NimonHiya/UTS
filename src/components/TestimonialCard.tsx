@@ -14,6 +14,7 @@ interface TestimonialCardProps {
 const TestimonialCard: React.FC<TestimonialCardProps> = ({
   name,
   title,
+  rating,
   content,
   isActive,
 }) => {
@@ -25,7 +26,11 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       {/* Rating */}
       <div className='flex items-center gap-1 text-yellow-400'>
         {Array.from({ length: 5 }).map((_, i) => (
-          <FaStar key={i} />
+          <FaStar
+            key={i}
+            className={`${i < rating ? 'text-yellow-500' : 'text-gray-300'}`}
+            aria-hidden='true'
+          />
         ))}
       </div>
 
@@ -40,6 +45,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
           width={56}
           height={56}
           className='w-12 h-12 rounded-full object-cover'
+          priority
         />
         <div>
           <h4 className='text-sm font-semibold text-gray-900'>{name}</h4>

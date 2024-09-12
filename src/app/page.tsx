@@ -1,29 +1,51 @@
-import React, { Suspense, lazy } from 'react';
+import dynamic from 'next/dynamic';
 import '@fontsource/lexend-deca'; // Import the font
 
-// Lazy load components
-const Navbar = lazy(() => import('../components/Navbar'));
-const HeroSection = lazy(() => import('@/components/HeroSection'));
-const Footer = lazy(() => import('../components/Footer'));
-const MockupSection = lazy(() => import('@/components/MockupSection'));
-const InfoSection = lazy(() => import('../components/InfoSection'));
-const InfoSection1 = lazy(() => import('../components/InfoSection1'));
-const InfoSection2 = lazy(() => import('@/components/InfoSection2'));
-const Testi = lazy(() => import('@/components/Testi'));
+// Lazy load components with dynamic import
+const Navbar = dynamic(() => import('../components/Navbar'), {
+  loading: () => <div>Loading navbar...</div>,
+  ssr: false,
+});
+const HeroSection = dynamic(() => import('@/components/HeroSection'), {
+  loading: () => <div>Loading hero section...</div>,
+  ssr: false,
+});
+const Footer = dynamic(() => import('../components/Footer'), {
+  loading: () => <div>Loading footer...</div>,
+  ssr: false,
+});
+const MockupSection = dynamic(() => import('@/components/MockupSection'), {
+  loading: () => <div>Loading mockup section...</div>,
+  ssr: false,
+});
+const InfoSection = dynamic(() => import('../components/InfoSection'), {
+  loading: () => <div>Loading info section...</div>,
+  ssr: false,
+});
+const InfoSection1 = dynamic(() => import('../components/InfoSection1'), {
+  loading: () => <div>Loading info section 1...</div>,
+  ssr: false,
+});
+const InfoSection2 = dynamic(() => import('@/components/InfoSection2'), {
+  loading: () => <div>Loading info section 2...</div>,
+  ssr: false,
+});
+const Testi = dynamic(() => import('@/components/Testi'), {
+  loading: () => <div>Loading testimonials...</div>,
+  ssr: false,
+});
 
 const Home: React.FC = () => {
   return (
     <div className='relative bg-white min-h-screen flex flex-col font-lexend'>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Navbar /> {/* Navbar */}
-        <HeroSection /> {/* Hero Section */}
-        <MockupSection />
-        <InfoSection />
-        <InfoSection1 />
-        <InfoSection2 />
-        <Testi /> {/* Testimonials Section */}
-        <Footer /> {/* Footer */}
-      </Suspense>
+      <Navbar />
+      <HeroSection />
+      <MockupSection />
+      <InfoSection />
+      <InfoSection1 />
+      <InfoSection2 />
+      <Testi />
+      <Footer />
     </div>
   );
 };
