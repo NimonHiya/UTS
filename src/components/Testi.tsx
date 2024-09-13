@@ -22,7 +22,6 @@ const Testi: React.FC = () => {
     threshold: 0.2,
   });
 
-  // Memoized testimonials array
   const testimonials: Testimonial[] = React.useMemo(
     () => [
       {
@@ -114,10 +113,10 @@ const Testi: React.FC = () => {
   );
 
   return (
-    <div className='w-full py-12 bg-gray-100'>
+    <div className='w-full py-12 bg-gray-100 dark:bg-gray-800'>
       <div className='container mx-auto px-4'>
         <div className='text-center mb-12'>
-          <h2 className='text-3xl font-bold text-[#232340]'>
+          <h2 className='text-3xl font-bold text-[#232340] dark:text-white'>
             What people say about Team
           </h2>
         </div>
@@ -125,8 +124,7 @@ const Testi: React.FC = () => {
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
-          transition={{ duration: 0.8 }}
-          className='text-[#232340]'>
+          transition={{ duration: 0.8 }}>
           <Slider {...sliderSettings}>
             {testimonials.map((testimonial, index) => (
               <TestimonialCard

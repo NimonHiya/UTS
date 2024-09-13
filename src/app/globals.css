@@ -6,9 +6,18 @@
 
 :root {
   --background-light: #ffffff;
-  --foreground-light: #000000;
+  --foreground-light: #232340;
   --background-dark: #1a1a1a;
-  --foreground-dark: #ededed;
+  --foreground-dark: #ffffff;
+  --dark-mode-bg: #2c2c2c;
+  --dark-mode-text: #ffffff;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: var(--background-light);
+    --foreground: var(--foreground-light);
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,6 +25,11 @@
     --background: var(--background-dark);
     --foreground: var(--foreground-dark);
   }
+}
+
+.dark {
+  --background: var(--dark-mode-bg);
+  --foreground: var(--dark-mode-text);
 }
 
 body {
