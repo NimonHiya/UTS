@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import TestimonialCard from './TestimonialCard'; // Ensure the path is correct
+import TestimonialCard from './TestimonialCard';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Slider from 'react-slick';
