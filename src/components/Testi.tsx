@@ -92,8 +92,6 @@ const Testi: React.FC = () => {
       slidesToShow: 3,
       slidesToScroll: 1,
       arrows: true,
-      autoplay: true,
-      autoplaySpeed: 2000,
       responsive: [
         {
           breakpoint: 768,
